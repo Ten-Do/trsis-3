@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { Modal } from "../modal/component";
-import styles from "./styles.module.css";
+import { Modal } from "../../modal/component";
+import styles from "../../add_btn/styles.module.css";
 
-export const FloatingBtn = ({ update }) => {
-  const [fieldCount, setFieldCount] = useState(1);
-  const [ingredients, setingredients] = useState([""]);
-  const [name, setname] = useState("");
-  const [description, setdescription] = useState("");
-  const [instructions, setinstructions] = useState("");
+export const EditBtn = ({ data, update }) => {
+  const [fieldCount, setFieldCount] = useState(data.ingredients?.length || 1);
+  const [ingredients, setingredients] = useState(data.ingredients || [""]);
+  const [name, setname] = useState(data.name || "");
+  const [description, setdescription] = useState(data.description || "");
+  const [instructions, setinstructions] = useState(data.instructions || "");
   const [showModal, setModal] = useState(false);
   const addTextField = () => {
     setFieldCount(fieldCount + 1);
@@ -38,13 +38,12 @@ export const FloatingBtn = ({ update }) => {
   return (
     <>
       <div
-        className={styles.add_btn}
         onClick={(e) => {
           e.stopPropagation();
           setModal(true);
         }}
       >
-        <img src="assets/add.svg" alt="" />
+        <img src="assets/edit.svg" alt="" />
       </div>
       {showModal && (
         <Modal
@@ -57,19 +56,24 @@ export const FloatingBtn = ({ update }) => {
             onSubmit={(e) => {
               e.preventDefault();
 
-              fetch(window.API, {
-                // mode: "no-cors",
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  name: name,
-                  description: description,
-                  instructions: instructions,
-                  ingredients: ingredients,
-                }),
-              })
+              fetch(
+                window.API +
+                  data.id,
+                {
+                  // mode: "no-cors",
+                  method: "PUT",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    id: data.id,
+                    name: name,
+                    description: description,
+                    instructions: instructions,
+                    ingredients: ingredients,
+                  }),
+                }
+              )
                 .then((res) => res.json())
                 .then((data) => console.log(data))
                 .catch((err) => console.log(err))
@@ -81,7 +85,7 @@ export const FloatingBtn = ({ update }) => {
           >
             <div className="input-container">
               <input
-              id="name"
+                id="name"
                 type="text"
                 value={name}
                 onChange={(e) => setname(e.target.value)}
@@ -91,21 +95,21 @@ export const FloatingBtn = ({ update }) => {
             </div>
             <div className="input-container">
               <textarea
-              id="desc"
+                id="des"
                 value={description}
                 onChange={(e) => setdescription(e.target.value)}
                 placeholder=" "
               ></textarea>
-              <label htmlFor="desc">Описание</label>
+              <label id="des">Описание</label>
             </div>
             <div className="input-container">
               <textarea
-              id="inst"
+                id="instr"
                 value={instructions}
                 onChange={(e) => setinstructions(e.target.value)}
                 placeholder=" "
               ></textarea>
-              <label htmlFor="inst">Инструкция</label>
+              <label htmlFor="instr">Инструкция</label>
             </div>
 
             {textFieldElements}

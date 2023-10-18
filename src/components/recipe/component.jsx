@@ -1,7 +1,10 @@
+import { DeleteBtn } from "../buttons/deleteBtn/component";
+import { EditBtn } from "../buttons/editBtn/component";
 import styles from "./styles.module.css";
 
 export const RecipeCard = ({
   data: { id, name, ingredients, instructions, description },
+  update,
 }) => {
   ingredients = ingredients || [];
   return (
@@ -28,12 +31,11 @@ export const RecipeCard = ({
       </div>
 
       <div className={styles.buttons}>
-        <div className={styles.edit_btn}>
-          <img src="assets/edit.svg" alt="" />
-        </div>
-        <div className={styles.del_btn}>
-          <img src="assets/del.svg" alt="" />
-        </div>
+        <EditBtn
+          update={update}
+          data={{ id, name, ingredients, instructions, description }}
+        />
+        <DeleteBtn id={id} title={name} update={update} />
       </div>
     </div>
   );

@@ -2,12 +2,12 @@
 import { useRef, useEffect } from "react";
 import styles from "./styles.module.css";
 
-export const useModal = () => {
+export const Modal = ({ children, hide }) => {
   const overlay = useRef(null);
   const wrapper = useRef(null);
 
-  const onDismiss = () => {
-    overlay.current.style.display = "none";
+  const onDismiss = hide ? hide : () => {
+    overlay.current.remove();
   };
 
   const onClick = (e) => {
@@ -15,22 +15,21 @@ export const useModal = () => {
       onDismiss();
     }
   };
-useEffect(() => {
-  onDismiss()
-}, [])
-  const Modal = ({ children }) => {
-    return (
-      <div ref={overlay} className={styles.overlay} onClick={onClick}>
-        <div ref={wrapper} className={styles.wrapper}>
-          {children}
-        </div>
+
+  const onKeyDown = (e) => {
+    if (e.key === "Escape") onDismiss();
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, []);
+
+  return (
+    <div ref={overlay} className={styles.overlay} onClick={onClick}>
+      <div ref={wrapper} className={styles.wrapper}>
+        {children}
       </div>
-    );
-  };
-
-  const showModal = () => {
-    overlay.current.style.display = "flex";
-  };
-
-  return [Modal, showModal];
+    </div>
+  );
 };
