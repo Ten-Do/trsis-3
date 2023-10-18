@@ -1,0 +1,21 @@
+.add_btn {
+  cursor: pointer;
+  width: 100px;
+  position: fixed;
+  bottom: 10px;
+  right: 40px;
+  backdrop-filter: blur(10px) brightness(0.3);
+  border-radius: 50%;
+}
+
+.add_btn img {
+  width: 100%;
+}
+.form > div[class='input-container'] {
+  margin-top: 20px;
+}
+.buttons {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}

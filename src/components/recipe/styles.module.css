@@ -1,0 +1,120 @@
+.card {
+  padding: 1rem 1.2rem;
+  border-radius: var(--border-radius);
+  background: rgba(var(--callout-rgba));
+  border: 1px solid rgba(var(--card-border-rgb), 0);
+  transition: background 200ms, border 200ms;
+  display: flex;
+  gap: 30px;
+}
+
+.card span {
+  display: inline-block;
+  transition: transform 200ms;
+}
+
+.card h2 {
+  width: fit-content;
+  padding-right: 20px;
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card p {
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  opacity: 0.8;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  max-width: 40ch;
+}
+
+.card .info {
+  flex: 1;
+}
+
+.ingredients {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px
+}
+
+.card .ingredients > div {
+  background-color: rgba(var(--callout-rgba));
+  border: 1px solid rgba(var(--card-border-rgb), 0.15);
+  border-radius: var(--border-radius-s);
+  width: fit-content;
+  padding: 2px 6px;
+}
+
+.card:hover {
+  background: rgba(var(--card-rgb), 0.1);
+  border: 1px solid rgba(var(--card-border-rgb), 0.15);
+}
+
+.card:hover span {
+  transform: translateX(8px);
+}
+
+
+@media (prefers-reduced-motion) {
+  .card:hover span {
+    transform: none;
+  }
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .content {
+    padding: 4rem;
+  }
+
+  .card {
+    padding: 1rem 2.5rem;
+  }
+
+  .card h2 {
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .vercelLogo {
+    filter: invert(1);
+  }
+
+  .logo {
+    filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.buttons {
+  width: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.buttons div {
+  cursor: pointer;
+}
+
+.buttons img {
+  width: 100%;
+}

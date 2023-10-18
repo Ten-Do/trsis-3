@@ -1,0 +1,15 @@
+.header_container {
+  border-bottom: 1px solid rgb(var(--border-rgb));
+  min-height: 60px;
+  padding: 10px 0;
+  backdrop-filter: blur(10px) brightness(0.5);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header_logo_title {
+  font-size: xx-large;
+  font-family: var(--font-mono);
+  text-align: center;
+}
